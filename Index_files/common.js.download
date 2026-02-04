@@ -1,0 +1,187 @@
+$(function(){
+	//buy
+	$(".buy_menu a").click(function(){
+		$(this).addClass("cur").siblings().removeClass("cur");
+		var index=$(".buy_menu a").index(this);	
+		$(this).parents(".buy_menu_wrap").siblings(".buy_wrap").find(".module").eq(index).show().siblings().hide();
+	});
+
+	//faqs
+	$(".faq_list .title").click(function(){
+		$(this).toggleClass('cur').siblings('.desc').slideToggle();
+	});
+	
+	//online help
+	$(".help-top .info a").hover(function(){
+		$(this).addClass("cur").siblings().removeClass("cur");
+
+		var index=$(".help-top .info a").index(this);
+/*		if(document.documentElement && document.documentElement.scrollTop) { //IE
+			if(document.documentElement.scrollTop > 0)
+				window.scrollBy(0,-30);
+		}
+		else{ //Chrome不支持documentElement.scrollTop
+			if(document.body.scrollTop>0)
+				window.scrollBy(0,-30);
+		}*/
+		$(this).parents(".help-top").siblings(".help-bot").find(".help-list").eq(index).show().siblings().hide();
+	});
+  
+  $(".online_menu a").hover(function(){
+		$(this).parent("li").addClass("cur").siblings().removeClass("cur");
+
+		var index=$(".online_menu a").index(this);
+/*		if(document.documentElement && document.documentElement.scrollTop) { //IE
+			if(document.documentElement.scrollTop > 0)
+				window.scrollBy(0,-30);
+		}
+		else{ //Chrome不支持documentElement.scrollTop
+			if(document.body.scrollTop>0)
+				window.scrollBy(0,-30);
+		}*/
+		$(this).parents(".ver-l").siblings(".ver-r").find(".module").eq(index).show().siblings().hide();
+	});
+	
+	//导航
+/*	$(".hd_nav li").click(function(){
+		$(this).children('.menu_drop').stop().slideToggle();
+		$(this).siblings('li').children('.menu_drop').slideUp();
+		
+	});*/
+	//手机端导航
+	/*$(".sj_menu").click(function(){
+		$(this).siblings('.hd_nav').slideToggle();
+	});*/
+
+	//
+	$(".tabmenu .lk").click(function() {
+
+		$(this).addClass("cur").siblings().removeClass("cur");
+
+		var index = $(this).parent('.tabmenu').children('.lk').index(this);
+
+		$(this).parents(".tabmenu").siblings(".tabwrap").find(".module").eq(index).show().siblings(
+			'.module').hide();
+
+	});
+	
+	$(window).scroll(function() {
+		if ($(window).scrollTop() > 1) {
+			$(".head").addClass('scroll');
+		} else {
+			$(".head").removeClass('scroll');
+		}
+	});
+	
+	
+	function dh() {
+		$('.sj-menu').click(function() {
+			$(this).toggleClass('close');
+			$('.hd-nav').slideToggle();
+		});
+	
+		$('.hd-nav .arrow').click(function() {
+			$(this).toggleClass('this').siblings('.drop').slideToggle();
+		});
+        
+        $('.lan_select_mn .lan_arrow').click(function() {
+            var parent=$(this).parent();
+			parent.siblings('ul').slideToggle();
+            parent.siblings('.continent_cnt').children('ul').slideToggle();
+		});
+        
+        $(".sel_lang").click(function() {
+            $(".float_sel_lang").css("display", "block");
+        });
+        
+        $(".lang_select .hd .close").click(function() {
+            $(".float_sel_lang").css("display", "none");
+        });
+	}
+	
+	function menu() {
+		if ($(window).width() < 991) {
+			$('.hd-nav').hide();
+		} else {
+			$('.hd-nav').show();
+		}
+	}
+	menu();
+	dh();
+	$(window).resize(function() {
+		menu();
+	});
+
+
+	// var countCXArr = [];
+	// var countCX = function() {
+	// 	$('.numscroll').each(function(i, dom) {
+	// 		if (countCXArr[i] && countCXArr[i] === true) {
+	// 			return;
+	// 		}
+	// 		var sT;
+	// 		var ncTop;
+	// 		sT = $(window).scrollTop();
+	// 		ncTop = $(dom).offset().top;
+	// 		var id, decimals, startVal, endVal, duration;
+	// 		if (sT > ncTop - $(window).height() && sT < ncTop) {
+	// 			$(dom).find('.numCX').each(function() {
+	// 				id = $(this).attr('id');
+	// 				decimals = $(this).attr('data-decimals'),
+	// 					startVal = $(this).attr('data-startVal'),
+	// 					endVal = $(this).attr('data-endVal'),
+	// 					duration = $(this).attr('data-speed');
+	// 				new CountUp(id, startVal, endVal, decimals, duration, {
+	// 						useEasing: true, //效果
+	// 						separator: '' //数字分隔符
+	// 					})
+	// 					.start(); // target：目标元素id, startVal：你想要开始的值, endVal：你想要到达的值, decimals：小数位数，默认值为0, duration：动画持续时间为秒，默认值为2, options：选项的可选对象
+	// 				countCXArr[i] = true;
+	// 			})
+	// 		}
+	// 	})
+	// }
+	// countCX();
+	// $(window).on("scroll", function() {
+	// 	countCX();
+	// })
+	// <p class="num"><i class="numCX" data-startVal="0" data-endVal="10" data-speed="6" data-decimals="0" id="mumC1">10</i>+</p>
+
+
+	if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))) {
+		var wow = new WOW({
+			boxClass: 'wow',
+			animateClass: 'animated',
+			offset: 0,
+			mobile: true,
+			live: true
+		});
+		wow.init();
+	};
+});
+
+/*(function(doc, win) {
+	var docEl = doc.documentElement,
+		resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+		recalc = function() {
+			var clientWidth = docEl.clientWidth;
+			if (!clientWidth) return;
+			if (clientWidth >= 1920) {
+				docEl.style.fontSize = '100px';
+			} else {
+				docEl.style.fontSize = 100 * (clientWidth / 1920) + 'px';
+			}
+		};
+	if (!doc.addEventListener) return;
+	win.addEventListener(resizeEvt, recalc, false);
+	doc.addEventListener('DOMContentLoaded', recalc, false);
+})(document, window);*/
+// document.oncontextmenu = new Function("return false;");
+// document.onkeydown = document.onkeyup = document.onkeypress = function(event) {
+//  var e = event || window.event || arguments.callee.caller.arguments[0];
+//  if (e && (e.keyCode == 123 || e.keyCode == 116)) {
+//          e.returnValue = false;
+//          return (false);
+//  }
+// }
+
